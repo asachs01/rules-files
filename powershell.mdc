@@ -1,0 +1,308 @@
+---
+description: 
+globs: *.ps1
+alwaysApply: false
+---
+# PowerShell Scripting Rules
+
+## General Guidelines
+
+### Required Rules
+
+1. All PowerShell scripts must include comment-based help using the following format:
+   ```powershell
+   <#
+   .SYNOPSIS
+       Brief description of what the script does
+   .DESCRIPTION
+       Detailed description of what the script does
+   .PARAMETER ParameterName
+       Description of the parameter
+   .EXAMPLE
+       Example of how to use the script
+   .NOTES
+       Additional information about the script
+   #>
+   ```
+
+2. All functions must be named using the Verb-Noun format and use approved PowerShell verbs (Get-Verb to see list)
+
+3. All scripts must implement proper error handling using try/catch blocks
+
+4. All scripts must use strongly typed parameters with proper validation
+
+5. All scripts must support the -WhatIf and -Confirm parameters when making changes
+
+6. All scripts must support the -Verbose and -Debug parameters
+
+7. All scripts must use Write-Verbose for detailed logging
+
+8. All scripts must use Write-Debug for debugging information
+
+9. All scripts must use Write-Warning for warning messages
+
+10. All scripts must use Write-Error for error messages
+
+### Strongly Encouraged Rules
+
+1. Use PascalCase for all function and parameter names
+
+2. Use singular nouns in function names (e.g., Get-Process not Get-Processes)
+
+3. Use standard parameter names when possible (e.g., ComputerName, Path, Force)
+
+4. Support pipeline input for parameters when appropriate
+
+5. Support wildcard characters in string parameters when appropriate
+
+6. Use switch parameters for true/false values instead of boolean parameters
+
+7. Support the PassThru parameter when modifying objects
+
+8. Use parameter sets to group related parameters
+
+9. Use the ValidateSet attribute for parameters with a fixed set of values
+
+10. Use the ValidateRange attribute for numeric parameters with a range of valid values
+
+### Code Layout and Formatting
+
+1. Use 4 spaces for indentation (no tabs)
+
+2. Place opening brace on the same line as the statement
+
+3. Place closing brace on its own line
+
+4. Use spaces around operators (e.g., $x = 5 not $x=5)
+
+5. Use spaces after commas in parameter lists
+
+6. Use spaces after semicolons in for loops
+
+7. Use spaces around comparison operators
+
+8. Use spaces around arithmetic operators
+
+9. Use spaces around assignment operators
+
+10. Use spaces around redirection operators
+
+### Function Structure
+
+1. Place comment-based help at the beginning of the function
+
+2. Place parameter block after the help
+
+3. Place begin block before the process block
+
+4. Place process block before the end block
+
+5. Use the process block for pipeline input
+
+6. Use the end block for cleanup
+
+7. Use the begin block for initialization
+
+8. Use the end block for finalization
+
+9. Use the process block for processing input
+
+10. Use the end block for output
+
+### Documentation and Comments
+
+1. Use comment-based help for all functions
+
+2. Use inline comments to explain complex logic
+
+3. Use block comments for sections of code
+
+4. Use TODO comments for future work
+
+5. Use FIXME comments for known issues
+
+6. Use HACK comments for temporary solutions
+
+7. Use NOTE comments for important information
+
+8. Use WARNING comments for potential issues
+
+9. Use DEPRECATED comments for deprecated code
+
+10. Use REMOVED comments for removed code
+
+### Readability
+
+1. Use descriptive variable names
+
+2. Use descriptive function names
+
+3. Use descriptive parameter names
+
+4. Use descriptive comment names
+
+5. Use descriptive error messages
+
+6. Use descriptive warning messages
+
+7. Use descriptive debug messages
+
+8. Use descriptive verbose messages
+
+9. Use descriptive output messages
+
+10. Use descriptive log messages
+
+### Naming Conventions
+
+1. Use PascalCase for function names
+
+2. Use PascalCase for parameter names
+
+3. Use PascalCase for variable names
+
+4. Use PascalCase for class names
+
+5. Use PascalCase for enum names
+
+6. Use PascalCase for type names
+
+7. Use PascalCase for property names
+
+8. Use PascalCase for method names
+
+9. Use PascalCase for event names
+
+10. Use PascalCase for delegate names
+
+### Building Reusable Tools
+
+1. Use functions instead of scripts when possible
+
+2. Use modules instead of scripts when possible
+
+3. Use classes instead of functions when possible
+
+4. Use interfaces instead of classes when possible
+
+5. Use abstract classes instead of interfaces when possible
+
+6. Use sealed classes instead of abstract classes when possible
+
+7. Use static classes instead of sealed classes when possible
+
+8. Use extension methods instead of static classes when possible
+
+9. Use partial classes instead of extension methods when possible
+
+10. Use nested classes instead of partial classes when possible
+
+### Output and Formatting
+
+1. Use Write-Output for normal output
+
+2. Use Write-Verbose for detailed output
+
+3. Use Write-Debug for debugging output
+
+4. Use Write-Warning for warning output
+
+5. Use Write-Error for error output
+
+6. Use Write-Information for information output
+
+7. Use Write-Progress for progress output
+
+8. Use Write-Host for host output
+
+9. Use Out-File for file output
+
+10. Use Out-String for string output
+
+### Error Handling
+
+1. Use try/catch blocks for error handling
+
+2. Use throw for throwing errors
+
+3. Use Write-Error for writing errors
+
+4. Use $ErrorActionPreference for error action
+
+5. Use $ErrorView for error view
+
+6. Use $Error for error collection
+
+7. Use $LastExitCode for exit code
+
+8. Use $? for success status
+
+9. Use $PSCmdlet.ThrowTerminatingError for terminating errors
+
+10. Use $PSCmdlet.WriteError for non-terminating errors
+
+### Performance
+
+1. Use arrays instead of collections when possible
+
+2. Use hashtables instead of arrays when possible
+
+3. Use string builders instead of string concatenation
+
+4. Use pipeline instead of foreach when possible
+
+5. Use Where-Object instead of if when possible
+
+6. Use Select-Object instead of foreach when possible
+
+7. Use Measure-Command for performance measurement
+
+8. Use Start-Transcript for performance logging
+
+9. Use Stop-Transcript for performance logging
+
+10. Use Get-Process for process information
+
+### Security
+
+1. Use SecureString for sensitive data
+
+2. Use ConvertTo-SecureString for secure string conversion
+
+3. Use ConvertFrom-SecureString for secure string conversion
+
+4. Use Get-Credential for credential input
+
+5. Use New-Object for object creation
+
+6. Use Get-Acl for access control
+
+7. Use Set-Acl for access control
+
+8. Use Get-AuthenticodeSignature for signature verification
+
+9. Use Set-AuthenticodeSignature for signature creation
+
+10. Use Test-Path for path verification
+
+### Additional Best Practices
+
+1. Use [CmdletBinding()] attribute for advanced functions
+
+2. Use [Parameter()] attribute for parameters
+
+3. Use [ValidateNotNull()] attribute for non-null parameters
+
+4. Use [ValidateNotNullOrEmpty()] attribute for non-empty parameters
+
+5. Use [ValidateScript()] attribute for script validation
+
+6. Use [ValidatePattern()] attribute for pattern validation
+
+7. Use [ValidateRange()] attribute for range validation
+
+8. Use [ValidateSet()] attribute for set validation
+
+9. Use [ValidateCount()] attribute for count validation
+
+10. Use [ValidateLength()] attribute for length validation

@@ -1,0 +1,150 @@
+---
+description: 
+globs: *.sh
+alwaysApply: false
+---
+# Bash Scripting Rules
+
+## Core Principles
+
+1. **Shell Selection**
+   - Use Bash as the only shell scripting language for executables
+   - Scripts must start with `#!/bin/bash` and minimal flags
+   - Use `set` to set shell options for consistent behavior
+
+2. **When to Use Shell**
+   - Shell should only be used for small utilities or simple wrapper scripts
+   - If mostly calling other utilities with minimal data manipulation
+   - If performance is critical, use another language
+   - If script exceeds 100 lines or uses complex control flow, rewrite in a structured language
+
+## File Structure
+
+1. **File Extensions**
+   - Executables should have `.sh` extension or no extension
+   - Libraries must have `.sh` extension and should not be executable
+   - No SUID/SGID on shell scripts (use `sudo` instead)
+
+2. **Error Handling**
+   - All error messages should go to STDERR
+   - Use a consistent error message function:
+   ```bash
+   err() {
+     echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
+   }
+   ```
+
+## Code Style
+
+1. **Comments**
+   - Every file must have a top-level comment describing its contents
+   - Copyright notice and author information are optional
+   - Use clear, descriptive comments for complex logic
+
+2. **Formatting**
+   - Use 2 spaces for indentation
+   - Maximum line length of 80 characters
+   - Use braces for all variable references: `${var}`
+   - Quote all variable references: `"${var}"`
+   - Use `[[ ... ]]` for tests instead of `[ ... ]` or `test`
+
+3. **Functions**
+   - Use lowercase with underscores to separate words
+   - Parentheses required after function name
+   - Braces must be on same line as function name
+   - Use `local` for function-specific variables
+   - Put all functions together near top of file
+   - For scripts with multiple functions, include a `main` function
+
+4. **Variables**
+   - Use lowercase with underscores for local variables
+   - Use uppercase with underscores for constants and environment variables
+   - Declare constants at top of file
+   - Use `readonly` or `declare -r` for constants
+   - Use `local` for function variables
+
+## Best Practices
+
+1. **Command Execution**
+   - Always check return values
+   - Use builtins over external commands when possible
+   - Use `$?` or direct `if` statements for return value checking
+   - For pipes, use `PIPESTATUS` array
+
+2. **Arithmetic**
+   - Use `$(( ... ))` for arithmetic
+   - Avoid `expr`, `let`, and `$[...]`
+   - Use `(( ... ))` for arithmetic tests
+
+3. **Arrays**
+   - Use arrays for lists of items
+   - Use `"${array[@]}"` for array expansion
+   - Use `declare -a` for array declaration
+
+4. **Quoting**
+   - Quote all variable references
+   - Quote command substitutions
+   - Quote strings containing variables or command substitutions
+   - Use single quotes for literal strings
+
+5. **Control Flow**
+   - Use `if [[ ... ]]` for tests
+   - Use `case` for pattern matching
+   - Use `while` and `for` loops appropriately
+   - Use `break` and `continue` sparingly
+
+## Security
+
+1. **Input Validation**
+   - Validate all input
+   - Use `read -r` to prevent backslash interpretation
+   - Use `set -u` to detect unset variables
+   - Use `set -e` to exit on error
+
+2. **File Operations**
+   - Use `rm -f` with caution
+   - Use `mv -i` or `cp -i` for interactive operations
+   - Use `chmod` with appropriate permissions
+
+## Testing
+
+1. **Test Coverage**
+   - Test all error conditions
+   - Test edge cases
+   - Test with different input types
+   - Test with different shell versions
+
+2. **Debugging**
+   - Use `set -x` for debugging
+   - Use `trap` for cleanup
+   - Use `set -e` for error handling
+   - Use `set -o pipefail` for pipe error handling
+
+## Documentation
+
+1. **Script Documentation**
+   - Include usage information
+   - Document all functions
+   - Document all parameters
+   - Document return values
+   - Document error conditions
+
+2. **Code Comments**
+   - Comment complex logic
+   - Comment non-obvious code
+   - Use TODO comments for future work
+   - Keep comments up to date
+
+## Portability
+
+1. **Shell Features**
+   - Use POSIX-compliant features when possible
+   - Document non-POSIX features
+   - Test on different platforms
+   - Use `command -v` instead of `which`
+
+2. **Path Handling**
+   - Use `dirname` and `basename` for path manipulation
+   - Use `readlink -f` for canonical paths
+   - Use `realpath` when available
+   - Handle spaces in paths correctly 
